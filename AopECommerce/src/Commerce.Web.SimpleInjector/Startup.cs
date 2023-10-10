@@ -5,11 +5,11 @@ using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Ploeh.Samples.Commerce.Domain;
 using Ploeh.Samples.Commerce.Domain.EventHandlers;
 using Ploeh.Samples.Commerce.ExternalConnections;
@@ -47,7 +47,7 @@ namespace Commerce.Web.SimpleInjector
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(o => o.EnableEndpointRouting = false);
 
             IntegrateSimpleInjector(services);
         }
@@ -65,7 +65,7 @@ namespace Commerce.Web.SimpleInjector
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             InitializeContainer(app);
 
@@ -102,7 +102,7 @@ namespace Commerce.Web.SimpleInjector
             container.Register(() => new CommerceContext(this.Configuration.ConnectionString),
                 Lifestyle.Scoped);
 
-            Assembly assembly = typeof(ITimeProvider).Assembly;
+            var assembly = typeof(ITimeProvider).Assembly;
 
             // ---- Start code Listing 14.11 ----
             container.Register(
@@ -145,9 +145,9 @@ namespace Commerce.Web.SimpleInjector
 
         private void RegisterAsImplementedInterfaces(IEnumerable<Type> implementationTypes)
         {
-            foreach (Type type in implementationTypes)
+            foreach (var type in implementationTypes)
             {
-                foreach (Type service in type.GetInterfaces())
+                foreach (var service in type.GetInterfaces())
                 {
                     this.container.Register(service, type);
                 }

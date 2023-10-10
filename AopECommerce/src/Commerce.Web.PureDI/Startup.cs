@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Ploeh.Samples.Commerce.Web.Presentation;
 
@@ -25,19 +26,18 @@ namespace Ploeh.Samples.Commerce.Web.PureDI
         {
             // Add framework services.
             services.AddHttpContextAccessor();
-            services.AddMvc();
+            services.AddMvc(o => o.EnableEndpointRouting = false);
 
             services.AddSingleton<IControllerActivator>(
                 _ => new CommerceControllerActivator(this.Configuration));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {

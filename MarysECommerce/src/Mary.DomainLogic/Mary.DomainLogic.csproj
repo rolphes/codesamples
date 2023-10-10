@@ -1,12 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>Ploeh.Samples.Mary.DomainLogic</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Mary.SqlDataAccess\Mary.SqlDataAccess.csproj" />
   </ItemGroup>
-
 </Project>

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Ploeh.Samples.ProductManagement.UWPClient (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Ploeh.Samples.ProductManagement.UWPClient (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

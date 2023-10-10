@@ -5,9 +5,9 @@ using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Ploeh.Samples.Commerce.Domain;
 using Ploeh.Samples.Commerce.Domain.CommandServices;
 using Ploeh.Samples.Commerce.ExternalConnections;
@@ -39,7 +39,7 @@ namespace Ploeh.Samples.Commerce.Web.MS.DI
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(o => o.EnableEndpointRouting = false);
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -48,7 +48,7 @@ namespace Ploeh.Samples.Commerce.Web.MS.DI
             services.AddScoped(_ => new CommerceContext(this.Configuration.ConnectionString));
 
             // ---- Start code Listing 15.7 ----
-            Assembly assembly = typeof(AdjustInventoryService).Assembly;
+            var assembly = typeof(AdjustInventoryService).Assembly;
 
             // Register ICommandService<T> implementations with their decorators
             var mappings =
@@ -63,17 +63,17 @@ namespace Ploeh.Samples.Commerce.Web.MS.DI
 
             foreach (var mapping in mappings)
             {
-                Type commandType = mapping.service.GetGenericArguments()[0];
+                var commandType = mapping.service.GetGenericArguments()[0];
 
-                Type secureDecoratoryType =
+                var secureDecoratoryType =
                     typeof(SecureCommandServiceDecorator<>)
                         .MakeGenericType(commandType);
 
-                Type saveChangesDecoratorType =
+                var saveChangesDecoratorType =
                     typeof(SaveChangesCommandServiceDecorator<>)
                         .MakeGenericType(commandType);
 
-                Type auditingDecoratorType =
+                var auditingDecoratorType =
                     typeof(AuditingCommandServiceDecorator<>)
                         .MakeGenericType(commandType);
 
@@ -128,7 +128,7 @@ namespace Ploeh.Samples.Commerce.Web.MS.DI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -159,8 +159,8 @@ namespace Ploeh.Samples.Commerce.Web.MS.DI
         private void RegisterAsImplementedInterfaces(
             IServiceCollection services, IEnumerable<Type> implementationTypes)
         {
-            foreach (Type type in implementationTypes)
-                foreach (Type service in type.GetInterfaces())
+            foreach (var type in implementationTypes)
+                foreach (var service in type.GetInterfaces())
                     services.AddTransient(service, type);
         }
 

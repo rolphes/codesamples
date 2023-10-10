@@ -30,13 +30,13 @@ namespace Ploeh.Samples.HelloDI.Console
 
         private static void LateBindingExample()
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
+            var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            string typeName = configuration["messageWriter"];
-            Type type = Type.GetType(typeName, throwOnError: true);
+            var typeName = configuration["messageWriter"];
+            var type = Type.GetType(typeName, throwOnError: true);
 
             IMessageWriter writer =
                 new SecureMessageWriter(

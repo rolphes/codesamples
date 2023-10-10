@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2026
@@ -19,11 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commerce.Web.Autofac", "Com
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commerce.Web.MS.DI", "Commerce.Web.MS.DI\Commerce.Web.MS.DI.csproj", "{252C328D-538E-44A1-8844-A4521E4992C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.Domain.Tests.Unit", "Commerce.Domain.Tests.Unit\Commerce.Domain.Tests.Unit.csproj", "{67B45220-832F-4FA5-9C00-D2A2049686B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commerce.Domain.Tests.Unit", "Commerce.Domain.Tests.Unit\Commerce.Domain.Tests.Unit.csproj", "{67B45220-832F-4FA5-9C00-D2A2049686B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.SqlDataAccess.Tests.Unit", "Commerce.SqlDataAccess.Tests.Unit\Commerce.SqlDataAccess.Tests.Unit.csproj", "{B1BDECCA-67AC-4577-99DD-C8B6103F278C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commerce.SqlDataAccess.Tests.Unit", "Commerce.SqlDataAccess.Tests.Unit\Commerce.SqlDataAccess.Tests.Unit.csproj", "{B1BDECCA-67AC-4577-99DD-C8B6103F278C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commerce.SqlDataAccess.Tests.Integration", "Commerce.SqlDataAccess.Tests.Integration\Commerce.SqlDataAccess.Tests.Integration.csproj", "{6DDC8A8F-1BE4-446F-8651-FA865B6F20A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commerce.SqlDataAccess.Tests.Integration", "Commerce.SqlDataAccess.Tests.Integration\Commerce.SqlDataAccess.Tests.Integration.csproj", "{6DDC8A8F-1BE4-446F-8651-FA865B6F20A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

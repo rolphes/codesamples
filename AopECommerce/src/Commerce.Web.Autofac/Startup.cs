@@ -1,13 +1,12 @@
 ﻿using System.Linq;
-using System.Reflection;
 using Autofac;
 using Autofac.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Ploeh.Samples.Commerce.Domain;
 using Ploeh.Samples.Commerce.Domain.EventHandlers;
 using Ploeh.Samples.Commerce.ExternalConnections;
@@ -39,9 +38,8 @@ namespace Commerce.Web.Autofac
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddMvc()
-                .AddControllersAsServices()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(o => o.EnableEndpointRouting = false)
+                .AddControllersAsServices();
         }
 
         // ConfigureContainer is where you can register things directly
@@ -52,7 +50,7 @@ namespace Commerce.Web.Autofac
         // "Without ConfigureContainer" mechanism shown later.
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            Assembly domainAssembly = typeof(ITimeProvider).Assembly;
+            var domainAssembly = typeof(ITimeProvider).Assembly;
 
             builder.RegisterType<DefaultTimeProvider>().As<ITimeProvider>().SingleInstance();
             builder.RegisterInstance<IUserContext>(new AspNetUserContextAdapter());
@@ -98,7 +96,7 @@ namespace Commerce.Web.Autofac
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

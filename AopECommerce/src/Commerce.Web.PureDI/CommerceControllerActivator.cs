@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Ploeh.Samples.Commerce.Domain;
@@ -101,6 +102,12 @@ namespace Ploeh.Samples.Commerce.Web.PureDI
         public void Release(ControllerContext context, object controller)
         {
             (controller as IDisposable)?.Dispose();
+        }
+
+        public ValueTask ReleaseAsync(ControllerContext context, object controller)
+        {
+            (controller as IDisposable)?.Dispose();
+            return ValueTask.CompletedTask;
         }
 
         private ICommandService<TCommand> Decorate<TCommand>(

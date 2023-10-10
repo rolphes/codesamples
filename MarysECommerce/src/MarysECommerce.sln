@@ -1,13 +1,13 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mary.ECommerce.WebUI", "Mary.ECommerce.WebUI\Mary.ECommerce.WebUI.csproj", "{E5EBA96B-17A3-4710-BAC2-5B3DBA016E9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mary.ECommerce.WebUI", "Mary.ECommerce.WebUI\Mary.ECommerce.WebUI.csproj", "{E5EBA96B-17A3-4710-BAC2-5B3DBA016E9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mary.DomainLogic", "Mary.DomainLogic\Mary.DomainLogic.csproj", "{522908E5-A885-42EF-833D-42E49537C9BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mary.DomainLogic", "Mary.DomainLogic\Mary.DomainLogic.csproj", "{522908E5-A885-42EF-833D-42E49537C9BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mary.SqlDataAccess", "Mary.SqlDataAccess\Mary.SqlDataAccess.csproj", "{0F650E5B-F2A6-478E-A230-A13741DF364E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mary.SqlDataAccess", "Mary.SqlDataAccess\Mary.SqlDataAccess.csproj", "{0F650E5B-F2A6-478E-A230-A13741DF364E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
